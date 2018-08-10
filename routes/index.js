@@ -9,6 +9,7 @@ router.use('/gallery', gallery);
 const Photo = require('../db/models/Photo');
 
 router.route('/').get((req, res) => {
+  let loggedIn = req.user ? true : false;
   return Photo.fetchAll()
     .then(result => {
       if (result.length === 0) {
@@ -18,8 +19,7 @@ router.route('/').get((req, res) => {
     })
     .then(photos => {
 
-
-      return res.render('./index', { photos });
+      return res.render('./index', { photos, loggedIn });
     })
     .catch(err => {
       console.log('errors', err);

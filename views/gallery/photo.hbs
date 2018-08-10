@@ -1,5 +1,4 @@
  {{#if title}}
-
 <div class="photo_card">
   <div class="photo_info">
     <p>{{title}} - {{link}}</p>
@@ -11,12 +10,9 @@
     <p>{{description}}</p>
   </div>
 </div>
-
 {{else}}
 <h3>This photo doesn't exist</h3>
-{{/if}}
-
-{{#if authorized}}
+{{/if}} {{#if authorized}}
 <form action='/gallery/{{id}}/edit' method='get'>
   <button type='submit'>Edit photo</button>
 </form>
@@ -24,7 +20,6 @@
   <input type="hidden" name="_method" value="DELETE">
   <button type='submit'>Delete photo</button>
 </form>
-{{/if}}
-{{#each errors}}
+{{/if}} {{#each errors}}
 <h3>{{message}}</h3>
-{{/each}} {{!-- {{>indexButtons}} --}}
+{{/each}}

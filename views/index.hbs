@@ -20,16 +20,10 @@
 </div>
 {{/if}} {{/each}} {{else}}
 <h3>There are currently no photos.</h3>
-{{/if}} {{!--
+{{/if}} {{#if loggedIn}}
 <form action='/photos/new' method='get'>
   <button type='submit'>Add a new photo</button>
-</form> --}} {{#each errors}}
+</form>
+{{/if}}{{#each errors}}
 <h3>{{message}}</h3>
-{{/each}} {{!-- {{>indexButtons}} --}} {{!--
-<div class="photo_info">
-  <h3>{{this.attributes.title}}</h3>
-  <h4>by {{this.attributes.author_username}} @ {{this.attributes.link}}</h4>
-</div> --}} {{!--
-<div class="photo_desc">
-  <p>{{this.attributes.description}}</p>
-</div> --}}
+{{/each}}
