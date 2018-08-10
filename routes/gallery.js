@@ -61,18 +61,22 @@ router.route('/:id/edit').get(isAuthenticated, (req, res) => {
 router
   .route('/:id')
   .get((req, res) => {
+    let loggedIn = false;
+    let authorized = false;
+    if (req.user.username) {
+      loggedIn = true;
+    }
     return Photo.where('id', req.params.id)
       .fetch()
       .then(result => {
-        if (result.length === 0) {
-          throw new Error('There are currently no photos.');
+        if (loggedIn && req.user.username === result.attributes.author_username) {
+          authorized = true;
         }
         return result.attributes;
       })
       .then(photo => {
-        console.log('*****', photo);
-
-        return res.render('./gallery/photo', photo);
+        console.log({authorized, ...photo});
+        return res.render('./gallery/photo', {authorized, ...photo});
       })
       .catch(err => {
         console.log('errors', err);

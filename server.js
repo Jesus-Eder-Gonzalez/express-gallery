@@ -18,7 +18,6 @@ const PORT = process.env.PORT || 15000;
 const User = require('./db/models/User');
 const app = express();
 const routes = require('./routes');
-const isAuthenticated = require('./helper/authenticated');
 
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -52,7 +51,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.serializeUser((user, done) => {
-  console.log('serializing');
   return done(null, {
     id: user.id,
     username: user.username
@@ -60,7 +58,6 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((user, done) => {
-  console.log('deserializing');
   new User({ id: user.id })
     .fetch()
     .then(user => {
@@ -84,11 +81,9 @@ passport.use(
       .fetch({ require: true })
       .then(user => {
         user = user.toJSON();
-        console.log(user);
         if (user === null) {
           return done(null, false, { message: 'bad username or password' });
         } else {
-          console.log(password, user.password);
           bcrypt.compare(password, user.password).then(samePassword => {
             if (samePassword) {
               return done(null, user);
@@ -117,7 +112,6 @@ app.post('/register', (req, res) => {
       return res.status(500);
     }
     bcrypt.hash(req.body.password, salt, (err, hashedPassword) => {
-      console.log('Hashed password:', hashedPassword);
       if (err) {
         return res.status(500);
       }
@@ -129,11 +123,9 @@ app.post('/register', (req, res) => {
       })
         .save()
         .then(user => {
-          console.log(user);
           res.redirect('/');
         })
         .catch(err => {
-          console.log(err);
           return res.send('Could not register you');
         });
     });
@@ -142,16 +134,11 @@ app.post('/register', (req, res) => {
 
 app.post('/login', function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
-    // console.log('ERROR:', err);
-    // console.log('USER:', user);
-    // console.log('INFO:', info);
-    // console.log('username: ', req.body.username);
-    // console.log('password: ', req.body.password);
 
     if (err) {
       req.flash('error', {message:'Incorrect username or password'});
       req.flash('username', req.body.username);
-      // console.log(err);
+
       return res.status(404).redirect('/login');
     }
 
@@ -178,13 +165,6 @@ app.post('/login', function(req, res, next) {
 app.get('/logout', (req, res) => {
   req.logout();
   res.sendStatus(200);
-});
-
-app.get('/secret', isAuthenticated, (req, res) => {
-  console.log('req.user: ', req.user);
-  console.log('req.user.id: ', req.user.id);
-  console.log('req.user.username: ', req.user.username);
-  res.send('you found the secret!');
 });
 
 app.get('/login', (req, res) => {

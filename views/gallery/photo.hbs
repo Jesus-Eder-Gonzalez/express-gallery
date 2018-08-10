@@ -16,15 +16,15 @@
 <h3>This photo doesn't exist</h3>
 {{/if}}
 
-
+{{#if authorized}}
 <form action='/gallery/{{id}}/edit' method='get'>
   <button type='submit'>Edit photo</button>
 </form>
-
 <form action='/gallery/{{id}}' method='POST' enctype="application/x-www-form-urlencoded">
   <input type="hidden" name="_method" value="DELETE">
   <button type='submit'>Delete photo</button>
 </form>
+{{/if}}
 {{#each errors}}
 <h3>{{message}}</h3>
 {{/each}} {{!-- {{>indexButtons}} --}}
