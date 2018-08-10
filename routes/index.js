@@ -15,11 +15,38 @@ router.route('/').get((req, res) => {
       if (result.length === 0) {
         throw new Error('There are currently no photos.');
       }
-      return result.models;
+      let rowCount = Math.ceil(result.models.length / 3);
+      let rows = [];
+
+      let tempArr = [];
+      for (let i = 1; i < result.models.length - 1; i++) {
+        tempArr.push(result.models[i]);
+        if (i % 3 === 0) {
+          rows.push({
+            row: {
+              col1: tempArr.pop(),
+              col2: tempArr.pop(),
+              col3: tempArr.pop()
+            }
+          });
+        }
+        if (i === result.models.length-2 && i%3 !==0){
+          rows.push({
+            row: {
+              col1: tempArr.pop(),
+              col2: tempArr.pop()
+            }
+          });
+
+        }
+      }
+      console.log(rows);
+      return {first_photo : result.models[0], rows};
+      // return result.models;
     })
     .then(photos => {
-
-      return res.render('./index', { photos, loggedIn });
+      console.log(photos);
+      return res.render('./index', { ...photos, loggedIn });
     })
     .catch(err => {
       console.log('errors', err);
@@ -27,4 +54,4 @@ router.route('/').get((req, res) => {
     });
 });
 
-module.exports= router;
+module.exports = router;

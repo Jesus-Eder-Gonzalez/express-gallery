@@ -47,7 +47,7 @@ html {
   flex-direction: column;
   width: 100%;
 
-  div {
+  .photo_card {
     display: flex;
     flex-direction: column;
 
@@ -80,9 +80,19 @@ html {
   .first_photo {
     width: 90%;
     padding-left: 2.5%;
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    padding-bottom: 1%;
+    padding-top: 1%;
 
     .photo_photo {
+      width: 100%;
       padding-left: 0%;
+      img {
+        width: 100%;
+      }
     }
   }
 }
@@ -96,7 +106,7 @@ html {
     flex-flow: column wrap;
     .top {
       .top_bar {
-        display:block;
+        display: block;
         border-top: dotted 2px;
         margin-left: 2.5%;
         margin-right: 0;
@@ -127,32 +137,39 @@ html {
       }
     }
   }
+
+  .body_container {
+    .rows {
+      display: flex;
+      flex-flow: row nowrap;
+      width: 90%;
+      // flex-shrink: 3;
+
+      .photo_card {
+        // display: flex;
+        // flex-direction: column;
+
+        align-items: center;
+        width: 33%;
+        padding-left: 3.75%;
+        padding-bottom: 1%;
+        padding-top: 1%;
+        .photo_photo {
+          align-content: stretch;
+        }
+        .photo_info {
+          margin-top: 0%;
+          width: 100%;
+          font-size: 1vw;
+          font-weight: 700;
+        }
+
+        .photo_desc {
+          margin-top: 1%;
+          width: 100%;
+          font-size: 1vw;
+        }
+      }
+    }
+  }
 }
-
-// .main_conatiner {
-//   display: flex;
-//   flex-flow: column nowrap;
-// }
-
-// .header {
-//   display: flex;
-//   flex-flow: row nowrap;
-//   justify-content: center;
-//   align-content: center;
-
-//   .header_logo{
-//     border-right: 1px solid;
-//     border-right-color: #c2c2d6;
-//   }
-//   div {
-//     display: flex;
-//   }
-// }
-
-// hr {
-//   color:#c2c2d6;
-// }
-
-// .top_bar {
-//   border: 1px dotted;
-// }

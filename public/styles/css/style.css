@@ -36,7 +36,7 @@ html {
   display: flex;
   flex-direction: column;
   width: 100%; }
-  .body_container div {
+  .body_container .photo_card {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -44,24 +44,32 @@ html {
     padding-left: 3.75%;
     padding-bottom: 1%;
     padding-top: 1%; }
-    .body_container div .photo_photo {
+    .body_container .photo_card .photo_photo {
       width: 100%; }
-      .body_container div .photo_photo img {
+      .body_container .photo_card .photo_photo img {
         width: 100%; }
-    .body_container div .photo_info {
+    .body_container .photo_card .photo_info {
       margin-top: -1%;
       width: 100%;
       font-size: 3vw;
       font-weight: 700; }
-    .body_container div .photo_desc {
+    .body_container .photo_card .photo_desc {
       margin-top: 1%;
       width: 100%;
       font-size: 3vw; }
   .body_container .first_photo {
     width: 90%;
-    padding-left: 2.5%; }
+    padding-left: 2.5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 1%;
+    padding-top: 1%; }
     .body_container .first_photo .photo_photo {
+      width: 100%;
       padding-left: 0%; }
+      .body_container .first_photo .photo_photo img {
+        width: 100%; }
 
 .top_bar {
   display: none; }
@@ -92,4 +100,25 @@ html {
         display: block;
         margin-left: -2%;
         width: 40%;
-        font-size: 1.25vw; } }
+        font-size: 1.25vw; }
+  .body_container .rows {
+    display: flex;
+    flex-flow: row nowrap;
+    width: 90%; }
+    .body_container .rows .photo_card {
+      align-items: center;
+      width: 33%;
+      padding-left: 3.75%;
+      padding-bottom: 1%;
+      padding-top: 1%; }
+      .body_container .rows .photo_card .photo_photo {
+        align-content: stretch; }
+      .body_container .rows .photo_card .photo_info {
+        margin-top: 0%;
+        width: 100%;
+        font-size: 1vw;
+        font-weight: 700; }
+      .body_container .rows .photo_card .photo_desc {
+        margin-top: 1%;
+        width: 100%;
+        font-size: 1vw; } }

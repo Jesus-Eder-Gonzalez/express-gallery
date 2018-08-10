@@ -1,25 +1,35 @@
- {{#if photos}} {{#each photos}} {{#if @first}}
+{{#if first_photo}}
+
 <div class="first_photo">
   <div class="photo_photo">
-    <a href="/gallery/{{this.attributes.id}}">
-      <img src="{{this.attributes.link}}">
+    <a href="/gallery/{{first_photo.attributes.id}}">
+      <img src="{{first_photo.attributes.link}}">
     </a>
   </div>
 </div>
-<hr class="under_first"> {{else}}
-<div class="photo_card">
-  <div class="photo_photo">
-    <a href="/gallery/{{this.attributes.id}}">
-      <img src="{{this.attributes.link}}">
-    </a>
+<hr class="under_first"> {{/if}} {{#each rows}}
+<div class="rows">
+  {{#each row}}
+  <div class="photo_card">
+    <div class="photo_photo">
+      <a href="/gallery/{{this.attributes.id}}">
+        <img src="{{this.attributes.link}}">
+      </a>
+    </div>
+    <div class="photo_info">
+      {{this.attributes.title}} - {{this.attributes.link}}
+    </div>
   </div>
-  <div class="photo_info">
-    {{this.attributes.title}} - {{this.attributes.link}}
-  </div>
+  {{/each}}
 </div>
-{{/if}} {{/each}} {{else}}
+{{/each}} 
+
+{{!-- 
+{{else}}
 <h3>There are currently no photos.</h3>
-{{/if}} {{#if loggedIn}}
+{{/if}}  --}}
+
+{{#if loggedIn}}
 <form action='/photos/new' method='get'>
   <button type='submit'>Add a new photo</button>
 </form>
