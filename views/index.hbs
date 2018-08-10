@@ -4,10 +4,9 @@
     <a href="/gallery/{{this.attributes.id}}">
       <img src="{{this.attributes.link}}">
     </a>
-    <hr>
   </div>
 </div>
-{{else}}
+<hr class="under_first"> {{else}}
 <div class="photo_card">
   <div class="photo_photo">
     <a href="/gallery/{{this.attributes.id}}">
@@ -15,7 +14,7 @@
     </a>
   </div>
   <div class="photo_info">
-    <p>{{this.attributes.title}} - {{this.attributes.link}}</p>
+    {{this.attributes.title}} - {{this.attributes.link}}
   </div>
 </div>
 {{/if}} {{/each}} {{else}}
