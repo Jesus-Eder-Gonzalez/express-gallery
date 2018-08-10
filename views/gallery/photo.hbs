@@ -1,18 +1,33 @@
- {{#if title}}
-<div class="photo_card">
-  <div class="photo_info">
-    <p>{{title}} - {{link}}</p>
+<div class="detail">
+  <div class="photo_left">
+    <div class="photo_card">
+      <div class="photo_info">
+        <p>{{this.title}} - {{link}}</p>
+      </div>
+      <div class="photo_photo">
+        <img src="{{link}}">
+      </div>
+      <div class="photo_desc">
+        <p>{{description}}</p>
+      </div>
+    </div>
   </div>
-  <div class="photo_photo">
-    <img src="{{link}}">
-  </div>
-  <div class="photo_desc">
-    <p>{{description}}</p>
+  <div class="photo_right">
+    {{#each photos}}
+    <a href="/gallery/{{id}}">
+      <div class="photo_card">
+        <div class="photo_photo">
+          <img src="{{link}}">
+        </div>
+        <div class="photo_info">
+          <p>{{title}} - {{link}}</p>
+        </div>
+      </div>
+    </a>
+    {{/each}}
   </div>
 </div>
-{{else}}
-<h3>This photo doesn't exist</h3>
-{{/if}} {{#if authorized}}
+{{#if authorized}}
 <form action='/gallery/{{id}}/edit' method='get'>
   <button type='submit'>Edit photo</button>
 </form>

@@ -11,7 +11,7 @@ class User extends bookshelf.Model {
   }
 
   photos() {
-    return this.hasMany('Photo', 'author_username');
+    return this.hasMany('Photo', 'author_username', 'username');
   }
 }
 

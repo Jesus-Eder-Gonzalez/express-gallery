@@ -65,19 +65,31 @@ router
   .route('/:id')
   .get((req, res) => {
     let authorized = false;
-
     return Photo.where('id', req.params.id)
-      .fetch()
+      .fetch({
+        withRelated: [
+          'author.photos',
+          {
+            'author.photos': function(qb) {
+              qb.where('id', '<>', req.params.id);
+            }
+          }
+        ]
+      })
       .then(result => {
         if (req.user) {
           if (req.user.username === result.attributes.author_username) {
             authorized = true;
           }
         }
-        return result.attributes;
+        return result.toJSON();
       })
-      .then(photo => {
-        return res.render('./gallery/photo', { authorized, ...photo });
+      .then(photos => {
+        return res.render('./gallery/photo', {
+          authorized,
+          ...photos,
+          photos: photos.author.photos
+        });
       })
       .catch(err => {
         console.log('errors', err);

@@ -11,7 +11,7 @@ class Photo extends bookshelf.Model {
   }
   
   author() {
-    return this.belongsTo('User','author_username');
+    return this.belongsTo('User','author_username', 'username');
   }
 }
 
